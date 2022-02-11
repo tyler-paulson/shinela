@@ -1,0 +1,26 @@
+<script>
+
+var Webflow = Webflow || [];
+
+Webflow.push(function () {
+    // Pull language from navigator and split, code we want should be in the first index
+    const languages_codes = navigator.language.toLowerCase().split('-');
+    // Hold match success in a boolean to prevent duplicate changes to location.href
+    var match = false;
+    // Loop through links to language homepages
+    jQuery('#splash-links a').each(function() {
+        // Language code is link text
+        let lang = $(this).text().toLowerCase();
+        // Check for match, if success, redirect
+        if(lang === languages_codes[0]) {
+            match = true;
+            location.href = '/home/'+lang;
+        }
+    });
+    // Fallback, if no match, load up English homepage
+    if(!match) {
+        location.href = '/home/en';
+    }
+});
+
+</script>
